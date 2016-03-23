@@ -1595,11 +1595,11 @@ PyObject *rsql;
 		PyErr_SetString(PyExc_RuntimeError,"Error: response data (Y) not specified.");
 		return NULL;
 	}
-	if(strcmp(PyArray_DESCR(self->X)->typeobj->tp_name,"numpy.ndarray")) { // X is Numpy ndarray
+	if(strcmp(self->X->ob_base.ob_type->tp_name,"numpy.ndarray")) { // X is Numpy ndarray
 		PyErr_SetString(PyExc_RuntimeError,"Error: X is not an numpy ndarray");
 		return NULL;
 	}
-	if(strcmp(PyArray_DESCR(self->Y)->typeobj->tp_name,"numpy.ndarray")) { // Y is Numpy ndarray
+	if(strcmp(self->Y->ob_base.ob_type->tp_name,"numpy.ndarray")) { // Y is Numpy ndarray
 		PyErr_SetString(PyExc_RuntimeError,"Error: Y is not an numpy ndarray");
 		return NULL;
 	}
@@ -1612,7 +1612,7 @@ PyObject *rsql;
 		return NULL;
 	}
 	if(self->ndweights==Py_None) self->ndweights=NULL;
-	if(self->ndweights && strcmp(PyArray_DESCR(self->ndweights)->typeobj->tp_name,"numpy.ndarray")) { // Y is Numpy ndarray
+	if(self->ndweights && strcmp(self->ndweights->ob_base.ob_type->tp_name,"numpy.ndarray")) { // Y is Numpy ndarray
 		PyErr_SetString(PyExc_RuntimeError,"Error: weights is not an numpy ndarray");
 		return NULL;
 	}
@@ -1703,7 +1703,7 @@ npy_intp dims[1]; // size of output matrix
 	X=NULL;
 	credk = 0;
 	if(!PyArg_ParseTupleAndKeywords(args,keywds,"O|d",tkwlist,&X,&credk)) return NULL;
-	if(strcmp(PyArray_DESCR(X)->typeobj->tp_name,"numpy.ndarray")) { // X is Numpy ndarray
+	if(strcmp(X->ob_base.ob_type->tp_name,"numpy.ndarray")) { // X is Numpy ndarray
 		PyErr_SetString(PyExc_RuntimeError,"Error: X is not an numpy ndarray");
 		return NULL;
 	}
